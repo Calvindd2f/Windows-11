@@ -90,26 +90,24 @@ $AntiVirusProducts = Get-WmiObject -Namespace "root\SecurityCenter2" -Class Anti
 
 
 <#
-$computerList = "localhost", "localhost"
-$filter = "antivirus"
-
+$LocalHost = 'localhost'
+$computerList = $LocalHost, $LocalHost
+$filter = 'antivirus'
 $results = @()
 foreach($computerName in $computerList) {
-
     $hive = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey([Microsoft.Win32.RegistryHive]::LocalMachine, $computerName)
-    $regPathList = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
-                   "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
-
+    $regPathList = 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall',
+                   'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
     foreach($regPath in $regPathList) {
         if($key = $hive.OpenSubKey($regPath)) {
             if($subkeyNames = $key.GetSubKeyNames()) {
                 foreach($subkeyName in $subkeyNames) {
                     $productKey = $key.OpenSubKey($subkeyName)
-                    $productName = $productKey.GetValue("DisplayName")
-                    $productVersion = $productKey.GetValue("DisplayVersion")
-                    $productComments = $productKey.GetValue("Comments")
+                    $productName = $productKey.GetValue('DisplayName')
+                    $productVersion = $productKey.GetValue('DisplayVersion')
+                    $productComments = $productKey.GetValue('Comments')
                     if(($productName -match $filter) -or ($productComments -match $filter)) {
-                        $resultObj = [PSCustomObject]@{
+                        $resultObj = New-Object -TypeName PSObject -Property @{
                             Host = $computerName
                             Product = $productName
                             Version = $productVersion
@@ -123,6 +121,5 @@ foreach($computerName in $computerList) {
         $key.Close()
     }
 }
-
-$results | ft -au
+$results | Format-Table -AutoSize
 #>

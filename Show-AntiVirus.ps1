@@ -1,95 +1,4 @@
-# Placeholder
-$computername=$env:computername
-$AntiVirusProducts = Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntiVirusProduct  -ComputerName $computername
-
-# To Do
-
-#Invoke-Anti_AntiVirus
-#https://github.com/Calvindd2f/Windows-10-11/blob/main/Invoke-Anti_Anti-Virus.ps1
-
-#$computername=$env:computername
-#$AntiVirusProducts = Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntiVirusProduct  -ComputerName $env:computername
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<#
+# WIP
 $LocalHost = 'localhost'
 $computerList = $LocalHost, $LocalHost
 $filter = 'antivirus'
@@ -122,4 +31,20 @@ foreach($computerName in $computerList) {
     }
 }
 $results | Format-Table -AutoSize
-#>
+
+
+
+
+
+
+
+
+# To Do
+
+#Invoke-Anti_AntiVirus
+#https://github.com/Calvindd2f/Windows-10-11/blob/main/Invoke-Anti_Anti-Virus.ps1
+
+#$computername=$env:computername
+#$AntiVirusProducts = Get-WmiObject -Namespace "root\SecurityCenter2" -Class AntiVirusProduct  -ComputerName $env:computername
+
+
